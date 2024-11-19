@@ -1,0 +1,35 @@
+/**
+ * Calculating Minimum Removals for Balanced Parentheses
+ */
+
+// Create a function that determines the minimum number of bracket removals needed for a valid string.
+function minRemovalsToBalance(brackets) {
+    // TODO: Initialize an empty array to act as the stack
+    const stack = []
+    const toRemove = []
+    
+    // TODO: Iterate through each bracket in the input string
+    for(const bracket of brackets) {
+        // TODO: Add conditions to handle the opening and closing brackets appropriately using stack operations
+        if (['(', '[', '{'].includes(bracket)) {
+            stack.push(bracket)
+        } else {
+            const lastBracket = stack[stack.length - 1]
+            if ((lastBracket === '(' && bracket === ')') ||
+                (lastBracket === '[' && bracket === ']') ||
+                (lastBracket === '{' && bracket === '}')) {
+                stack.pop()
+            } else {
+                stack.push(bracket)
+            }
+        }
+    }
+        
+    // TODO: Return the count of brackets that need to be removed to make the string valid
+    return stack.length
+}
+
+// Example usage
+let invalidParentheses = "()))(()";
+let removalsNeeded = minRemovalsToBalance(invalidParentheses);
+console.log(removalsNeeded);  // Expected output: 3
